@@ -16,6 +16,7 @@ p span {
 .active {
   background: #F9A826;
   color: white;
-  border: none;
+  border: 2px solid #F9A826;
+  cursor: pointer;
 }
 /*# sourceMappingURL=quizz-item.component.css.map */
