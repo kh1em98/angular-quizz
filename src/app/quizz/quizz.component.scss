@@ -1,0 +1,35 @@
+$purple-color: #6066D0;
+$dark-purple: #2F527B;
+
+.quizz__heading {
+  color: #f2f2f2;
+  text-transform: uppercase;
+  font-weight: 700;
+  font-size: 36px;
+  line-height: 54px;
+}
+
+.quizz__card {
+  position: relative;
+  background: #fff;
+  width: 465px;
+  border-radius: 24px;
+  color: $purple-color;
+
+
+  .quizz__card__img {
+    position: absolute;
+    top: -65px;
+    left: 65%;
+  }
+
+  .quizz__card__title {
+    color: $dark-purple;
+    text-align: center;
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 36px;
+    padding-top: 68px;
+  }
+
+}
