@@ -5,6 +5,8 @@ import { AppComponent } from './app.component';
 import { QuizzComponent } from './quizz/quizz.component';
 import { QuizzItemComponent } from './quizz/quizz-item/quizz-item.component';
 import { QuizzHoverDirective } from './quizz/quizz-item/quizz-hover.directive';
+import { ResultComponent } from './quizz/result/result.component';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -12,9 +14,11 @@ import { QuizzHoverDirective } from './quizz/quizz-item/quizz-hover.directive';
     QuizzComponent,
     QuizzItemComponent,
     QuizzHoverDirective,
+    ResultComponent,
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    HttpClientModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
