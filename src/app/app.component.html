@@ -1,1 +1,3 @@
-<app-quizz></app-quizz>
+<h1 class="text-center text-white" *ngIf="isLoading">Loading...</h1>
+
+<app-quizz *ngIf='!isLoading'></app-quizz>

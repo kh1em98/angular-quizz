@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { QuizzService } from '../quizz.service';
 
 @Component({
   selector: 'app-quizz-item',
@@ -8,10 +9,16 @@ import { Component, Input, OnInit } from '@angular/core';
 export class QuizzItemComponent implements OnInit {
   @Input() choice;
   @Input() choice_letter;
+  @Input() index;
+  @Input() isAnsweredMode;
 
-  constructor() { }
+  constructor(private quizzService: QuizzService) { }
 
   ngOnInit(): void {
+  }
+
+  submitAnswer() {
+    this.quizzService.checkAnswer(this.index);
   }
 
 }

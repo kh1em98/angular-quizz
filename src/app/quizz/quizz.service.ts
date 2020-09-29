@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, Observable, Subject } from 'rxjs';
 import { CountryDetail } from '../shared/country.model';
 import { HttpClient } from '@angular/common/http';
 import { tap } from 'rxjs/operators'
@@ -8,13 +8,14 @@ import { tap } from 'rxjs/operators'
   providedIn: 'root'
 })
 export class QuizzService {
-
+  isAnsweredMode = new BehaviorSubject(false);
+  isWrongAnswer: boolean = false;
   arrCountries: CountryDetail[] = [];
   countryChosen: CountryDetail = null;
-
   questionTaken: { index: number, typeQuestion: number }[] = [];
-
-  allChoices: string[] = [];
+  allChoices: { name: string, correct: boolean }[] = [];
+  score: number = 0;
+  scoreChanged = new BehaviorSubject(0);
 
 
   constructor(private http: HttpClient) { }
@@ -57,7 +58,6 @@ export class QuizzService {
     return null;
   }
 
-
   // Xếp các đáp án ngẫu nhiên
   randomPositionChoices(choices) {
     while (choices.length > 0) {
@@ -73,21 +73,21 @@ export class QuizzService {
   // Tạo mảng 4 đáp án
   createAllChoices() {
     let choices = [];
-    choices.push(this.countryChosen.name);
+    choices.push({ name: this.countryChosen.name, correct: true });
 
     while (1) {
       let isExisted: boolean = false;
       let randIndex: number = Math.floor(Math.random() * this.arrCountries.length);
 
       for (let i = 0; i < this.allChoices.length; i++) {
-        if (this.arrCountries[randIndex].name === this.allChoices[i] && this.arrCountries[randIndex].name !== this.countryChosen.name) {
+        if (this.arrCountries[randIndex].name === this.allChoices[i].name && this.arrCountries[randIndex].name !== this.countryChosen.name) {
           isExisted = true;
           break;
         }
       }
 
       if (!isExisted) {
-        choices.push(this.arrCountries[randIndex].name);
+        choices.push({ name: this.arrCountries[randIndex].name, correct: null });
         if (choices.length === 4) {
           this.randomPositionChoices(choices);
           return;
@@ -95,8 +95,6 @@ export class QuizzService {
       }
     }
   }
-
-
 
   // Chọn 1 country để đưa ra câu hỏi
   createRandomQuiz() {
@@ -120,6 +118,38 @@ export class QuizzService {
     else {
       return { question: 'End !', typeQuestion: -1 }
     }
+  }
+
+  checkAnswer(index: number) {
+    this.isAnsweredMode.next(true);
+
+    if (this.allChoices[index].correct === true) {
+      this.score++;
+      this.scoreChanged.next(this.score);
+    }
+    else {
+      this.isWrongAnswer = true;
+      this.allChoices[index].correct = false;
+    }
+  }
+
+  resetProperties() {
+    this.isWrongAnswer = false;
+    this.countryChosen = null;
+    this.allChoices = [];
+  }
+
+  resetGame() {
+    this.resetProperties();
+    this.questionTaken = [];
+    this.score = 0;
+    this.isAnsweredMode.next(false);
+    this.scoreChanged.next(0);
+  }
+
+  nextQuiz() {
+    this.resetProperties();
+    this.isAnsweredMode.next(false);
   }
 
 }

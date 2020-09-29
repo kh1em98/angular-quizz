@@ -1,4 +1,4 @@
-import { Directive, Host, HostBinding, HostListener } from '@angular/core';
+import { Directive, ElementRef, Host, HostBinding, HostListener } from '@angular/core';
 
 @Directive({
   selector: '[appQuizzHover]'
@@ -15,6 +15,6 @@ export class QuizzHoverDirective {
     this.isHover = false;
   }
 
-  constructor() { }
+  constructor(private elementRef: ElementRef) { }
 
 }

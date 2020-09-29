@@ -8,6 +8,7 @@ import { QuizzHoverDirective } from './quizz/quizz-item/quizz-hover.directive';
 import { ResultComponent } from './quizz/result/result.component';
 import { HttpClientModule } from '@angular/common/http';
 
+
 @NgModule({
   declarations: [
     AppComponent,

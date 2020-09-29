@@ -1,4 +1,19 @@
-<div class="mt-4 pl-4 pr-4" appQuizzHover>
-  <p>{{choice_letter}}<span class="ml-3">{{ choice }}</span> </p>
+<div class="mt-4 pl-4 pr-4" appQuizzHover (click)="submitAnswer()" *ngIf="!isAnsweredMode">
+  <p>{{choice_letter}}<span class="ml-3">{{ choice.name }}</span> </p>
   <img src="../../../assets/done.svg">
+</div>
+
+
+<div class="mt-4 pl-4 pr-4 correct" *ngIf="isAnsweredMode && choice.correct === true">
+  <p>{{choice_letter}}<span class="ml-3">{{ choice.name }}</span> </p>
+  <img src="../../../assets/done.svg">
+</div>
+
+<div class="mt-4 pl-4 pr-4 wrong" *ngIf="isAnsweredMode && choice.correct === false">
+  <p>{{choice_letter}}<span class="ml-3">{{ choice.name }}</span> </p>
+  <img src="../../../assets/clear.svg">
+</div>
+
+<div class="mt-4 pl-4 pr-4" *ngIf="isAnsweredMode && choice.correct === null">
+  <p>{{choice_letter}}<span class="ml-3">{{ choice.name }}</span> </p>
 </div>

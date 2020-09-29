@@ -1,20 +1,15 @@
-<div *ngIf="isLoading">
-  <h2 class="text-center pt-4 pl-4 pr 4 pb-4">Loading....</h2>
-</div>
-
-
-<div *ngIf="!isLoading">
+<div>
   <h3 class="quizz__heading">
-    Country Quizz
+    Score : {{score}}
   </h3>
 
 
   <div class="quizz__card pl-5 pr-5 pb-4">
-    <div *ngIf="isAnsweredMode">
+    <div *ngIf="isDisplayResult">
       <app-result></app-result>
     </div>
 
-    <div *ngIf="!isAnsweredMode">
+    <div *ngIf="!isDisplayResult">
       <div class="quizz__card__img mb-5">
         <img src="../../assets/undraw_adventure_4hum 1.svg">
       </div>
@@ -34,10 +29,12 @@
       </div>
 
 
-      <app-quizz-item *ngFor="let choice of choices; let i = index" [choice]="choice" [choice_letter]="choice_letters[i]"></app-quizz-item>
+      <app-quizz-item *ngFor="let choice of choices; let i = index" [choice]="choice" [isAnsweredMode]="isAnsweredMode"
+        [choice_letter]="choice_letters[i]" [index]="i">
+      </app-quizz-item>
 
-      <div class="btn_container mt-4">
-        <button class="btn">Next</button>
+      <div class="btn_container mt-4" *ngIf="isAnsweredMode">
+        <button class="btn" (click)="continueGame()">Next</button>
       </div>
     </div>
 

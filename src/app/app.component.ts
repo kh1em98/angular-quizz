@@ -8,10 +8,14 @@ import { QuizzService } from './quizz/quizz.service';
 })
 export class AppComponent implements OnInit {
 
+  isLoading = true;
+
   constructor(private quizzService: QuizzService) { }
 
   ngOnInit() {
-
+    this.quizzService.fetchAllCountries().subscribe(
+      () => this.isLoading = false
+    )
   }
 
 
