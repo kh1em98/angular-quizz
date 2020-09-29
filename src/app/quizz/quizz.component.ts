@@ -7,6 +7,7 @@ import { QuizzService } from './quizz.service';
   styleUrls: ['./quizz.component.css']
 })
 export class QuizzComponent implements OnInit {
+  isAnsweredMode: boolean = true;
 
   isLoading: boolean = true;
 
@@ -17,12 +18,10 @@ export class QuizzComponent implements OnInit {
 
   quiz: { question: string, typeQuestion: number } = null;
 
-
-
   constructor(private quizzService: QuizzService) { }
 
   ngOnInit(): void {
-    this.quizzService.init()
+    this.quizzService.fetchAllCountries()
       .subscribe(() => {
         this.isLoading = false;
         this.quiz = this.quizzService.createRandomQuiz();

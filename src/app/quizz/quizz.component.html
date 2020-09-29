@@ -7,31 +7,44 @@
   <h3 class="quizz__heading">
     Country Quizz
   </h3>
+
+
   <div class="quizz__card pl-5 pr-5 pb-4">
-    <div class="quizz__card__img mb-5">
-      <img src="../../assets/undraw_adventure_4hum 1.svg">
+    <div *ngIf="isAnsweredMode">
+      <app-result></app-result>
     </div>
 
-    <div class="quizz__card__question" *ngIf="quiz.typeQuestion === 0">
-      <h4 class="quizz__card__title">
-        {{ quiz.question }} is the Capital of ?
-      </h4>
+    <div *ngIf="!isAnsweredMode">
+      <div class="quizz__card__img mb-5">
+        <img src="../../assets/undraw_adventure_4hum 1.svg">
+      </div>
+
+      <div class="quizz__card__question" *ngIf="quiz.typeQuestion === 0">
+        <h4 class="quizz__card__title">
+          {{ quiz.question }} is the Capital of ?
+        </h4>
+      </div>
+
+
+      <div class="quizz__card__question" *ngIf="quiz.typeQuestion === 1">
+        <img class="quizz__card__flag mr-3" [src]="quiz.question" />
+        <h4 class="quizz__card__title">
+          is the flag of ?
+        </h4>
+      </div>
+
+
+      <app-quizz-item *ngFor="let choice of choices; let i = index" [choice]="choice" [choice_letter]="choice_letters[i]"></app-quizz-item>
+
+      <div class="btn_container mt-4">
+        <button class="btn">Next</button>
+      </div>
     </div>
 
 
-    <div class="quizz__card__question" *ngIf="quiz.typeQuestion === 1">
-      <img class="quizz__card__flag mr-3" [src]="quiz.question" />
-      <h4 class="quizz__card__title">
-        is the flag of ?
-      </h4>
-    </div>
 
 
-    <app-quizz-item *ngFor="let choice of choices; let i = index" [choice]="choice" [choice_letter]="choice_letters[i]"></app-quizz-item>
 
-    <div class="btn_container mt-4">
-      <button class="btn">Next</button>
-    </div>
   </div>
 
 </div>

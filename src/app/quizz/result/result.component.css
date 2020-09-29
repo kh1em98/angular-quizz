@@ -1,0 +1,47 @@
+.quizz__result {
+  padding-top: 50px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.quizz__result h3 {
+  font-style: normal;
+  font-weight: bold;
+  font-size: 48px;
+  line-height: 72px;
+  color: #1D355D;
+}
+
+.quizz__result p {
+  font-size: 18px;
+  line-height: 27px;
+  color: #1D355D;
+}
+
+.quizz__result p .score {
+  color: #60BF88;
+  font-weight: 700;
+  font-size: 36px;
+}
+
+.quizz__result button {
+  width: 209px;
+  height: 62px;
+  font-weight: 600;
+  font-size: 18px;
+  line-height: 27px;
+  border: 2px solid #1D355D;
+  border-radius: 12px;
+}
+/*# sourceMappingURL=result.component.css.map */

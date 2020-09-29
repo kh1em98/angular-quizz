@@ -4,8 +4,6 @@ import { CountryDetail } from '../shared/country.model';
 import { HttpClient } from '@angular/common/http';
 import { tap } from 'rxjs/operators'
 
-
-
 @Injectable({
   providedIn: 'root'
 })
@@ -21,7 +19,7 @@ export class QuizzService {
 
   constructor(private http: HttpClient) { }
 
-  init() {
+  fetchAllCountries() {
     return this.http.get('https://restcountries.eu/rest/v2/all?fields=name;capital;flag')
       .pipe(
         tap((data: CountryDetail[]) => {

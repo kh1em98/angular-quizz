@@ -1,0 +1,41 @@
+.quizz__result {
+  padding-top: 50px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  h3 {
+    font-style: normal;
+    font-weight: bold;
+    font-size: 48px;
+    line-height: 72px;
+    color: #1D355D;
+  }
+
+  p {
+    font-size: 18px;
+    line-height: 27px;
+    color: #1D355D;
+
+    .score {
+      color: #60BF88;
+      font-weight: 700;
+      font-size: 36px;
+    }
+
+  }
+
+
+
+  button {
+    width: 209px;
+    height: 62px;
+
+    font-weight: 600;
+    font-size: 18px;
+    line-height: 27px;
+    border: 2px solid #1D355D;
+    border-radius: 12px;
+  }
+}
