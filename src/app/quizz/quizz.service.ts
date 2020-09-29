@@ -8,7 +8,10 @@ import { tap } from 'rxjs/operators'
   providedIn: 'root'
 })
 export class QuizzService {
-  isAnsweredMode = new BehaviorSubject(false);
+
+  private isAnsweredMode = new BehaviorSubject(false);
+  answerModeChanged = this.isAnsweredMode.asObservable();
+
   isWrongAnswer: boolean = false;
   arrCountries: CountryDetail[] = [];
   countryChosen: CountryDetail = null;
@@ -29,7 +32,7 @@ export class QuizzService {
       )
   }
 
-  // Tạo 1 số ngẫu nhiên nhỏ hơn max, không trùng các số đã thi
+  // Tạo 1 index ngẫu nhiên và kiểu câu hỏi ngẫu nhiên, không trùng với các quiz cũ 
   chooseCountry(max: number): { index: number, typeQuestion: number } {
     let isExisted: boolean = false;
 
@@ -54,7 +57,6 @@ export class QuizzService {
         }
       }
     }
-    console.log(isExisted);
     return null;
   }
 
@@ -79,6 +81,7 @@ export class QuizzService {
       let isExisted: boolean = false;
       let randIndex: number = Math.floor(Math.random() * this.arrCountries.length);
 
+      // Kiểm tra 3 đáp án sai này có trùng nhau hay trùng với đáp án đúng ko
       for (let i = 0; i < this.allChoices.length; i++) {
         if (this.arrCountries[randIndex].name === this.allChoices[i].name && this.arrCountries[randIndex].name !== this.countryChosen.name) {
           isExisted = true;
@@ -96,7 +99,7 @@ export class QuizzService {
     }
   }
 
-  // Chọn 1 country để đưa ra câu hỏi
+
   createRandomQuiz() {
     const lengthArrCountries = this.arrCountries.length;
     const { index, typeQuestion } = this.chooseCountry(lengthArrCountries);
@@ -116,6 +119,7 @@ export class QuizzService {
 
     }
     else {
+      // Hết câu hỏi để thi rồi
       return { question: 'End !', typeQuestion: -1 }
     }
   }
